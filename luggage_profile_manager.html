@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Luggage Profile Manager - LuggageTracker</title>
+    <link rel="stylesheet" href="../css/main.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<script type="module" src="https://static.rocket.new/rocket-web.js?_cfg=https%3A%2F%2Fluggagetra3536back.builtwithrocket.new&_be=https%3A%2F%2Fapplication.rocket.new&_v=0.1.8"></script>
+</head>
+<body class="bg-background">
+    <!-- Navigation Header -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <div class="flex items-center">
+                    <svg class="h-8 w-8 text-primary mr-3" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M19 7h-3V6a4 4 0 0 0-8 0v1H5a1 1 0 0 0-1 1v11a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V8a1 1 0 0 0-1-1zM10 6a2 2 0 0 1 4 0v1h-4V6zm8 13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V9h2v1a1 1 0 0 0 2 0V9h4v1a1 1 0 0 0 2 0V9h2v10z"/>
+                    </svg>
+                    <span class="text-xl font-bold text-text-primary">LuggageTracker</span>
+                </div>
+
+                <!-- Desktop Navigation -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="homepage.html" class="text-text-secondary hover:text-primary transition-colors">Home</a>
+                    <a href="live_tracking_dashboard.html" class="text-text-secondary hover:text-primary transition-colors">Live Tracking</a>
+                    <a href="journey_timeline.html" class="text-text-secondary hover:text-primary transition-colors">Journey</a>
+                    <a href="luggage_profile_manager.html" class="text-primary font-semibold">My Luggage</a>
+                    <a href="emergency_action_center.html" class="text-text-secondary hover:text-primary transition-colors">Emergency</a>
+                    <a href="community_support.html" class="text-text-secondary hover:text-primary transition-colors">Support</a>
+                </div>
+
+                <!-- User Profile -->
+                <div class="hidden md:flex items-center space-x-4">
+                    <button class="text-text-secondary hover:text-primary">
+                        <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-5 5v-5zM4 19h6v-2H4v2zM4 15h8v-2H4v2zM4 11h10V9H4v2z"/>
+                        </svg>
+                    </button>
+                    <div class="w-8 h-8 bg-primary rounded-full flex items-center justify-center">
+                        <span class="text-white text-sm font-semibold">JD</span>
+                    </div>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden">
+                    <button id="mobile-menu-btn" class="text-text-secondary hover:text-primary">
+                        <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Mobile Menu -->
+            <div id="mobile-menu" class="md:hidden hidden">
+                <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white border-t">
+                    <a href="homepage.html" class="block px-3 py-2 text-text-secondary hover:text-primary">Home</a>
+                    <a href="live_tracking_dashboard.html" class="block px-3 py-2 text-text-secondary hover:text-primary">Live Tracking</a>
+                    <a href="journey_timeline.html" class="block px-3 py-2 text-text-secondary hover:text-primary">Journey</a>
+                    <a href="luggage_profile_manager.html" class="block px-3 py-2 text-primary font-semibold">My Luggage</a>
+                    <a href="emergency_action_center.html" class="block px-3 py-2 text-text-secondary hover:text-primary">Emergency</a>
+                    <a href="community_support.html" class="block px-3 py-2 text-text-secondary hover:text-primary">Support</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Page Header -->
+    <section class="bg-gradient-to-br from-primary-50 to-accent-50 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+                <div>
+                    <h1 class="text-3xl md:text-4xl font-bold text-text-primary mb-2">Luggage Profile Manager</h1>
+                    <p class="text-lg text-text-secondary">Manage your digital luggage inventory with detailed documentation and insurance coverage</p>
+                </div>
+                <div class="flex flex-col sm:flex-row gap-3">
+                    <button id="add-luggage-btn" class="btn-primary flex items-center">
+                        <svg class="h-5 w-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                        </svg>
+                        Add New Luggage
+                    </button>
+                    <button class="btn-secondary flex items-center">
+                        <svg class="h-5 w-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                        </svg>
+                        Export Profiles
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Stats -->
+    <section class="py-8 bg-white border-b border-secondary-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                <div class="text-center">
+                    <div class="text-2xl font-bold text-primary">5</div>
+                    <div class="text-sm text-text-secondary">Total Luggage</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-2xl font-bold text-accent">$12,450</div>
+                    <div class="text-sm text-text-secondary">Total Value</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-2xl font-bold text-secondary-600">3</div>
+                    <div class="text-sm text-text-secondary">Active Policies</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-2xl font-bold text-text-primary">127</div>
+                    <div class="text-sm text-text-secondary">Total Items</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <section class="py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col lg:flex-row gap-8">
+                <!-- Sidebar Filters -->
+                <div class="lg:w-64 flex-shrink-0">
+                    <div class="card">
+                        <h3 class="font-semibold text-text-primary mb-4 flex items-center">
+                            <svg class="h-5 w-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.414A1 1 0 013 6.707V4z"/>
+                            </svg>
+                            Filter & Sort
+                        </h3>
+                        
+                        <!-- Search -->
+                        <div class="mb-4">
+                            <input type="text" placeholder="Search luggage..." class="input-field text-sm" />
+                        </div>
+
+                        <!-- Category Filter -->
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium text-text-primary mb-2">Category</label>
+                            <select class="input-field text-sm">
+                                <option>All Categories</option>
+                                <option>Carry-on</option>
+                                <option>Checked Luggage</option>
+                                <option>Personal Item</option>
+                                <option>Equipment Case</option>
+                            </select>
+                        </div>
+
+                        <!-- Status Filter -->
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium text-text-primary mb-2">Status</label>
+                            <div class="space-y-2">
+                                <label class="flex items-center">
+                                    <input type="checkbox" class="rounded border-secondary-300 text-primary focus:ring-primary" checked />
+                                    <span class="ml-2 text-sm text-text-secondary">Active</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="checkbox" class="rounded border-secondary-300 text-primary focus:ring-primary" />
+                                    <span class="ml-2 text-sm text-text-secondary">Archived</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="checkbox" class="rounded border-secondary-300 text-primary focus:ring-primary" />
+                                    <span class="ml-2 text-sm text-text-secondary">In Transit</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Insurance Status -->
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium text-text-primary mb-2">Insurance</label>
+                            <div class="space-y-2">
+                                <label class="flex items-center">
+                                    <input type="checkbox" class="rounded border-secondary-300 text-primary focus:ring-primary" checked />
+                                    <span class="ml-2 text-sm text-text-secondary">Insured</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="checkbox" class="rounded border-secondary-300 text-primary focus:ring-primary" />
+                                    <span class="ml-2 text-sm text-text-secondary">Uninsured</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Reset Filters -->
+                        <button class="w-full text-sm text-primary hover:text-primary-700 font-medium">
+                            Reset All Filters
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Luggage Profiles Grid -->
+                <div class="flex-1">
+                    <!-- View Toggle -->
+                    <div class="flex justify-between items-center mb-6">
+                        <div class="flex items-center space-x-4">
+                            <span class="text-text-secondary">5 luggage profiles</span>
+                            <div class="flex items-center space-x-2">
+                                <button class="p-2 text-primary bg-primary-50 rounded-lg">
+                                    <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
+                                        <path d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM11 13a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/>
+                                    </svg>
+                                </button>
+                                <button class="p-2 text-text-secondary hover:text-primary rounded-lg">
+                                    <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                        <select class="input-field text-sm w-auto">
+                            <option>Sort by Name</option>
+                            <option>Sort by Value</option>
+                            <option>Sort by Date Added</option>
+                            <option>Sort by Last Used</option>
+                        </select>
+                    </div>
+
+                    <!-- Luggage Cards Grid -->
+                    <div class="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
+                        <!-- Luggage Profile 1 -->
+                        <div class="card hover:shadow-lg transition-shadow">
+                            <div class="relative mb-4">
+                                <img src="https://images.unsplash.com/photo-1553062407-98eeb64c6a62?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Business Carry-on" class="w-full h-48 object-cover rounded-lg" loading="lazy" onerror="this.src='https://images.pexels.com/photos/1008155/pexels-photo-1008155.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'; this.onerror=null;" />
+                                <div class="absolute top-3 right-3">
+                                    <span class="status-success">Active</span>
+                                </div>
+                                <div class="absolute top-3 left-3 bg-white rounded-full p-2">
+                                    <svg class="h-4 w-4 text-primary" fill="currentColor" viewBox="0 0 20 20">
+                                        <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z"/>
+                                    </svg>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-4">
+                                <h3 class="font-semibold text-text-primary mb-1">Business Carry-on</h3>
+                                <p class="text-sm text-text-secondary">Samsonite Pro-DLX 5 • Black</p>
+                            </div>
+
+                            <div class="space-y-2 mb-4">
+                                <div class="flex justify-between text-sm">
+                                    <span class="text-text-secondary">Total Value</span>
+                                    <span class="font-semibold text-text-primary">$3,250</span>
+                                </div>
+                                <div class="flex justify-between text-sm">
+                                    <span class="text-text-secondary">Items</span>
+                                    <span class="font-semibold text-text-primary">24</span>
+                                </div>
+                                <div class="flex justify-between text-sm">
+                                    <span class="text-text-secondary">Insurance</span>
+                                    <span class="font-semibold text-accent">Covered</span>
+                                </div>
+                                <div class="flex justify-between text-sm">
+                                    <span class="text-text-secondary">Last Updated</span>
+                                    <span class="font-semibold text-text-primary">Sep 20, 2025</span>
+                                </div>
+                            </div>
+
+                            <div class="flex space-x-2">
+                                <button class="flex-1 btn-primary text-sm py-2">View Details</button>
+                                <button class="p-2 border border-secondary-200 rounded-lg hover:bg-surface transition-colors">
+                                    <svg class="h-4 w-4 text-text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+                                    </svg>
+                                </button>
+                                <button class="p-2 border border-secondary-200 rounded-lg hover:bg-surface transition-colors">
+                                    <svg class="h-4 w-4 text-text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Luggage Profile 2 -->
+                        <div class="card hover:shadow-lg transition-shadow">
+                            <div class="relative mb-4">
+                                <img src="https://images.pexels.com/photos/1008155/pexels-photo-1008155.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Large Suitcase" class="w-full h-48 object-cover rounded-lg" loading="lazy" onerror="this.src='https://images.pixabay.com/photo/2017/02/02/23/03/luggage-2034650_1280.jpg'; this.onerror=null;" />
+                                <div class="absolute top-3 right-3">
+                                    <span class="status-warning">In Transit</span>
+                                </div>
+                                <div class="absolute top-3 left-3 bg-white rounded-full p-2">
+                                    <svg class="h-4 w-4 text-primary" fill="currentColor" viewBox="0 0 20 20">
+                                        <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z"/>
+                                    </svg>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-4">
+                                <h3 class="font-semibold text-text-primary mb-1">Large Suitcase</h3>
+                                <p class="text-sm text-text-secondary">Tumi Alpha 3 • Navy Blue</p>
+                            </div>
+
+                            <div class="space-y-2 mb-4">
+                                <div class="flex justify-between text-sm">
+                                    <span class="text-text-secondary">Total Value</span>
+                                    <span class="font-semibold text-text-primary">$4,890</span>
+                                </div>
+                                <div class="flex justify-between text-sm">
+                                    <span class="text-text-secondary">Items</span>
+                                    <span class="font-semibold text-text-primary">38</span>
+                                </div>
+                                <div class="flex justify-between text-sm">
+                                    <span class="text-text-secondary">Insurance</span>
+                                    <span class="font-semibold text-accent">Covered</span>
+                                </div>
+                                <div class="flex justify-between text-sm">
+                                    <span class="text-text-secondary">Last Updated</span>
+                                    <span class="font-semibold text-text-primary">Sep 25, 2025</span>
+                                </div>
+                            </div>
+
+                            <div class="flex space-x-2">
+                                <button class="flex-1 btn-primary text-sm py-2">View Details</button>
+                                <button class="p-2 border border-secondary-200 rounded-lg hover:bg-surface transition-colors">
+                                    <svg class="h-4 w-4 text-text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+                                    </svg>
+                                </button>
+                                <button class="p-2 border border-secondary-200 rounded-lg hover:bg-surface transition-colors">
+                                    <svg class="h-4 w-4 text-text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Luggage Profile 3 -->
+                        <div class="card hover:shadow-lg transition-shadow">
+                            <div class="relative mb-4">
+                                <img src="https://images.pixabay.com/photo/2017/02/02/23/03/luggage-2034650_1280.jpg" alt="Camera Equipment Case" class="w-full h-48 object-cover rounded-lg" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1553062407-98eeb64c6a62?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;" />
+                                <div class="absolute top-3 right-3">
+                                    <span class="status-success">Active</span>
+                                </div>
+                                <div class="absolute top-3 left-3 bg-white rounded-full p-2">
+                                    <svg class="h-4 w-4 text-primary" fill="currentColor" viewBox="0 0 20 20">
+                                        <path d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z"/>
+                                    </svg>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-4">
+                                <h3 class="font-semibold text-text-primary mb-1">Camera Equipment Case</h3>
+                                <p class="text-sm text-text-secondary">Pelican 1650 • Black</p>
+                            </div>
+
+                            <div class="space-y-2 mb-4">
+                                <div class="flex justify-between text-sm">
+                                    <span class="text-text-secondary">Total Value</span>
+                                    <span class="font-semibold text-text-primary">$8,750</span>
+                                </div>
+                                <div class="flex justify-between text-sm">
+                                    <span class="text-text-secondary">Items</span>
+                                    <span class="font-semibold text-text-primary">12</span>
+                                </div>
+                                <div class="flex justify-between text-sm">
+                                    <span class="text-text-secondary">Insurance</span>
+                                    <span class="font-semibold text-accent">Premium</span>
+                                </div>
+                                <div class="flex justify-between text-sm">
+                                    <span class="text-text-secondary">Last Updated</span>
+                                    <span class="font-semibold text-text-primary">Sep 18, 2025</span>
+                                </div>
+                            </div>
+
+                            <div class="flex space-x-2">
+                                <button class="flex-1 btn-primary text-sm py-2">View Details</button>
+                                <button class="p-2 border border-secondary-200 rounded-lg hover:bg-surface transition-colors">
+                                    <svg class="h-4 w-4 text-text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+                                    </svg>
+                                </button>
+                                <button class="p-2 border border-secondary-200 rounded-lg hover:bg-surface transition-colors">
+                                    <svg class="h-4 w-4 text-text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Luggage Profile 4 -->
+                        <div class="card hover:shadow-lg transition-shadow">
+                            <div class="relative mb-4">
+                                <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Weekend Duffel" class="w-full h-48 object-cover rounded-lg" loading="lazy" onerror="this.src='https://images.pexels.com/photos/1008155/pexels-photo-1008155.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'; this.onerror=null;" />
+                                <div class="absolute top-3 right-3">
+                                    <span class="bg-secondary-100 text-secondary-600 border border-secondary-200 px-3 py-1 rounded-full text-sm font-medium">Archived</span>
+                                </div>
+                                <div class="absolute top-3 left-3 bg-white rounded-full p-2">
+                                    <svg class="h-4 w-4 text-primary" fill="currentColor" viewBox="0 0 20 20">
+                                        <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z"/>
+                                    </svg>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-4">
+                                <h3 class="font-semibold text-text-primary mb-1">Weekend Duffel</h3>
+                                <p class="text-sm text-text-secondary">Patagonia Black Hole • Forest Green</p>
+                            </div>
+
+                            <div class="space-y-2 mb-4">
+                                <div class="flex justify-between text-sm">
+                                    <span class="text-text-secondary">Total Value</span>
+                                    <span class="font-semibold text-text-primary">$680</span>
+                                </div>
+                                <div class="flex justify-between text-sm">
+                                    <span class="text-text-secondary">Items</span>
+                                    <span class="font-semibold text-text-primary">15</span>
+                                </div>
+                                <div class="flex justify-between text-sm">
+                                    <span class="text-text-secondary">Insurance</span>
+                                    <span class="font-semibold text-text-secondary">Basic</span>
+                                </div>
+                                <div class="flex justify-between text-sm">
+                                    <span class="text-text-secondary">Last Updated</span>
+                                    <span class="font-semibold text-text-primary">Aug 15, 2025</span>
+                                </div>
+                            </div>
+
+                            <div class="flex space-x-2">
+                                <button class="flex-1 btn-secondary text-sm py-2">Reactivate</button>
+                                <button class="p-2 border border-secondary-200 rounded-lg hover:bg-surface transition-colors">
+                                    <svg class="h-4 w-4 text-text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+                                    </svg>
+                                </button>
+                                <button class="p-2 border border-secondary-200 rounded-lg hover:bg-surface transition-colors">
+                                    <svg class="h-4 w-4 text-text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Luggage Profile 5 -->
+                        <div class="card hover:shadow-lg transition-shadow">
+                            <div class="relative mb-4">
+                                <img src="https://images.pexels.com/photos/1008155/pexels-photo-1008155.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Laptop Backpack" class="w-full h-48 object-cover rounded-lg" loading="lazy" onerror="this.src='https://images.pixabay.com/photo/2017/02/02/23/03/luggage-2034650_1280.jpg'; this.onerror=null;" />
+                                <div class="absolute top-3 right-3">
+                                    <span class="status-success">Active</span>
+                                </div>
+                                <div class="absolute top-3 left-3 bg-white rounded-full p-2">
+                                    <svg class="h-4 w-4 text-primary" fill="currentColor" viewBox="0 0 20 20">
+                                        <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z"/>
+                                    </svg>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-4">
+                                <h3 class="font-semibold text-text-primary mb-1">Laptop Backpack</h3>
+                                <p class="text-sm text-text-secondary">Peak Design Everyday • Charcoal</p>
+                            </div>
+
+                            <div class="space-y-2 mb-4">
+                                <div class="flex justify-between text-sm">
+                                    <span class="text-text-secondary">Total Value</span>
+                                    <span class="font-semibold text-text-primary">$2,180</span>
+                                </div>
+                                <div class="flex justify-between text-sm">
+                                    <span class="text-text-secondary">Items</span>
+                                    <span class="font-semibold text-text-primary">18</span>
+                                </div>
+                                <div class="flex justify-between text-sm">
+                                    <span class="text-text-secondary">Insurance</span>
+                                    <span class="font-semibold text-accent">Covered</span>
+                                </div>
+                                <div class="flex justify-between text-sm">
+                                    <span class="text-text-secondary">Last Updated</span>
+                                    <span class="font-semibold text-text-primary">Sep 26, 2025</span>
+                                </div>
+                            </div>
+
+                            <div class="flex space-x-2">
+                                <button class="flex-1 btn-primary text-sm py-2">View Details</button>
+                                <button class="p-2 border border-secondary-200 rounded-lg hover:bg-surface transition-colors">
+                                    <svg class="h-4 w-4 text-text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+                                    </svg>
+                                </button>
+                                <button class="p-2 border border-secondary-200 rounded-lg hover:bg-surface transition-colors">
+                                    <svg class="h-4 w-4 text-text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Add New Luggage Card -->
+                        <div class="card border-2 border-dashed border-secondary-300 hover:border-primary transition-colors cursor-pointer" id="add-new-card">
+                            <div class="flex flex-col items-center justify-center h-64 text-center">
+                                <div class="bg-primary-50 p-4 rounded-full mb-4">
+                                    <svg class="h-8 w-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                                    </svg>
+                                </div>
+                                <h3 class="font-semibold text-text-primary mb-2">Add New Luggage</h3>
+                                <p class="text-sm text-text-secondary">Create a detailed profile for your luggage with photos and inventory</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pagination -->
+                    <div class="flex justify-center mt-8">
+                        <nav class="flex items-center space-x-2">
+                            <button class="p-2 text-text-secondary hover:text-primary disabled:opacity-50" disabled>
+                                <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                                </svg>
+                            </button>
+                            <button class="px-3 py-2 bg-primary text-white rounded-lg">1</button>
+                            <button class="px-3 py-2 text-text-secondary hover:text-primary">2</button>
+                            <button class="px-3 py-2 text-text-secondary hover:text-primary">3</button>
+                            <button class="p-2 text-text-secondary hover:text-primary">
+                                <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                                </svg>
+                            </button>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Actions Panel -->
+    <section class="py-8 bg-surface">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-2xl font-bold text-text-primary mb-6">Quick Actions</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Bulk Operations -->
+                <div class="card text-center">
+                    <div class="bg-primary-100 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <svg class="h-6 w-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-semibold text-text-primary mb-2">Bulk Operations</h3>
+                    <p class="text-sm text-text-secondary mb-4">Update multiple luggage profiles at once</p>
+                    <button class="btn-secondary text-sm w-full">Manage Bulk</button>
+                </div>
+
+                <!-- Generate QR Codes -->
+                <div class="card text-center">
+                    <div class="bg-accent-100 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <svg class="h-6 w-6 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-semibold text-text-primary mb-2">Generate QR Tags</h3>
+                    <p class="text-sm text-text-secondary mb-4">Create physical tags for your luggage</p>
+                    <button class="btn-secondary text-sm w-full">Create Tags</button>
+                </div>
+
+                <!-- Insurance Review -->
+                <div class="card text-center">
+                    <div class="bg-secondary-100 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <svg class="h-6 w-6 text-secondary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-semibold text-text-primary mb-2">Insurance Review</h3>
+                    <p class="text-sm text-text-secondary mb-4">Review and update insurance coverage</p>
+                    <button class="btn-secondary text-sm w-full">Review Coverage</button>
+                </div>
+
+                <!-- Export Data -->
+                <div class="card text-center">
+                    <div class="bg-primary-100 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <svg class="h-6 w-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-semibold text-text-primary mb-2">Export Data</h3>
+                    <p class="text-sm text-text-secondary mb-4">Download your luggage profiles and data</p>
+                    <button class="btn-secondary text-sm w-full">Export All</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Add Luggage Modal -->
+    <div id="add-luggage-modal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50">
+        <div class="flex items-center justify-center min-h-screen p-4">
+            <div class="bg-white rounded-xl shadow-xl max-w-2xl w-full max-h-screen overflow-y-auto">
+                <div class="p-6 border-b border-secondary-200">
+                    <div class="flex justify-between items-center">
+                        <h2 class="text-xl font-bold text-text-primary">Add New Luggage Profile</h2>
+                        <button id="close-modal" class="text-text-secondary hover:text-text-primary">
+                            <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="p-6">
+                    <form class="space-y-6">
+                        <!-- Basic Information -->
+                        <div>
+                            <h3 class="font-semibold text-text-primary mb-4">Basic Information</h3>
+                            <div class="grid md:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm font-medium text-text-primary mb-2">Luggage Name</label>
+                                    <input type="text" placeholder="e.g., Business Carry-on" class="input-field" />
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-text-primary mb-2">Category</label>
+                                    <select class="input-field">
+                                        <option>Select Category</option>
+                                        <option>Carry-on</option>
+                                        <option>Checked Luggage</option>
+                                        <option>Personal Item</option>
+                                        <option>Equipment Case</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-text-primary mb-2">Brand</label>
+                                    <input type="text" placeholder="e.g., Samsonite" class="input-field" />
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-text-primary mb-2">Model</label>
+                                    <input type="text" placeholder="e.g., Pro-DLX 5" class="input-field" />
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-text-primary mb-2">Color</label>
+                                    <input type="text" placeholder="e.g., Black" class="input-field" />
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-text-primary mb-2">Size</label>
+                                    <select class="input-field">
+                                        <option>Select Size</option>
+                                        <option>Small (Under 20")</option>
+                                        <option>Medium (20-24")</option>
+                                        <option>Large (25-28")</option>
+                                        <option>Extra Large (29"+)</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Photo Upload -->
+                        <div>
+                            <h3 class="font-semibold text-text-primary mb-4">Photos</h3>
+                            <div class="grid md:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm font-medium text-text-primary mb-2">Exterior Photo</label>
+                                    <div class="border-2 border-dashed border-secondary-300 rounded-lg p-6 text-center hover:border-primary transition-colors cursor-pointer">
+                                        <svg class="h-8 w-8 text-text-secondary mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                                        </svg>
+                                        <p class="text-sm text-text-secondary">Click to upload exterior photo</p>
+                                    </div>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-text-primary mb-2">Contents Photo</label>
+                                    <div class="border-2 border-dashed border-secondary-300 rounded-lg p-6 text-center hover:border-primary transition-colors cursor-pointer">
+                                        <svg class="h-8 w-8 text-text-secondary mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                                        </svg>
+                                        <p class="text-sm text-text-secondary">Click to upload contents photo</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Insurance Information -->
+                        <div>
+                            <h3 class="font-semibold text-text-primary mb-4">Insurance Information</h3>
+                            <div class="grid md:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm font-medium text-text-primary mb-2">Insurance Provider</label>
+                                    <select class="input-field">
+                                        <option>Select Provider</option>
+                                        <option>Allianz Travel</option>
+                                        <option>World Nomads</option>
+                                        <option>Travel Guard</option>
+                                        <option>Other</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-text-primary mb-2">Policy Number</label>
+                                    <input type="text" placeholder="Enter policy number" class="input-field" />
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-text-primary mb-2">Coverage Amount</label>
+                                    <input type="number" placeholder="0.00" class="input-field" />
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-text-primary mb-2">Expiry Date</label>
+                                    <input type="date" class="input-field" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Action Buttons -->
+                        <div class="flex justify-end space-x-4 pt-6 border-t border-secondary-200">
+                            <button type="button" id="cancel-btn" class="btn-secondary">Cancel</button>
+                            <button type="submit" class="btn-primary">Create Profile</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-secondary-900 text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="grid md:grid-cols-4 gap-8">
+                <!-- Company Info -->
+                <div class="md:col-span-2">
+                    <div class="flex items-center mb-4">
+                        <svg class="h-8 w-8 text-primary mr-3" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M19 7h-3V6a4 4 0 0 0-8 0v1H5a1 1 0 0 0-1 1v11a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V8a1 1 0 0 0-1-1zM10 6a2 2 0 0 1 4 0v1h-4V6zm8 13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V9h2v1a1 1 0 0 0 2 0V9h4v1a1 1 0 0 0 2 0V9h2v10z"/>
+                        </svg>
+                        <span class="text-xl font-bold">LuggageTracker</span>
+                    </div>
+                    <p class="text-secondary-200 mb-4 max-w-md">
+                        Your trusted companion for stress-free travel. Track your luggage with confidence and travel with peace of mind.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="javascript:void(0)" class="text-secondary-400 hover:text-white transition-colors">
+                            <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/>
+                            </svg>
+                        </a>
+                        <a href="javascript:void(0)" class="text-secondary-400 hover:text-white transition-colors">
+                            <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M22.46 6c-.77.35-1.6.58-2.46.69.88-.53 1.56-1.37 1.88-2.38-.83.5-1.75.85-2.72 1.05C18.37 4.5 17.26 4 16 4c-2.35 0-4.27 1.92-4.27 4.29 0 .34.04.67.11.98C8.28 9.09 5.11 7.38 3 4.79c-.37.63-.58 1.37-.58 2.15 0 1.49.75 2.81 1.91 3.56-.71 0-1.37-.2-1.95-.5v.03c0 2.08 1.48 3.82 3.44 4.21a4.22 4.22 0 0 1-1.93.07 4.28 4.28 0 0 0 4 2.98 8.521 8.521 0 0 1-5.33 1.84c-.34 0-.68-.02-1.02-.06C3.44 20.29 5.7 21 8.12 21 16 21 20.33 14.46 20.33 8.79c0-.19 0-.37-.01-.56.84-.6 1.56-1.36 2.14-2.23z"/>
+                            </svg>
+                        </a>
+                        <a href="javascript:void(0)" class="text-secondary-400 hover:text-white transition-colors">
+                            <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div>
+                    <h3 class="font-semibold mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="live_tracking_dashboard.html" class="text-secondary-300 hover:text-white transition-colors">Live Tracking</a></li>
+                        <li><a href="journey_timeline.html" class="text-secondary-300 hover:text-white transition-colors">Journey Timeline</a></li>
+                        <li><a href="luggage_profile_manager.html" class="text-secondary-300 hover:text-white transition-colors">My Luggage</a></li>
+                        <li><a href="emergency_action_center.html" class="text-secondary-300 hover:text-white transition-colors">Emergency Center</a></li>
+                        <li><a href="community_support.html" class="text-secondary-300 hover:text-white transition-colors">Support</a></li>
+                    </ul>
+                </div>
+
+                <!-- Support -->
+                <div>
+                    <h3 class="font-semibold mb-4">Support</h3>
+                    <ul class="space-y-2">
+                        <li><a href="javascript:void(0)" class="text-secondary-300 hover:text-white transition-colors">Help Center</a></li>
+                        <li><a href="javascript:void(0)" class="text-secondary-300 hover:text-white transition-colors">Contact Us</a></li>
+                        <li><a href="javascript:void(0)" class="text-secondary-300 hover:text-white transition-colors">Privacy Policy</a></li>
+                        <li><a href="javascript:void(0)" class="text-secondary-300 hover:text-white transition-colors">Terms of Service</a></li>
+                        <li><a href="javascript:void(0)" class="text-secondary-300 hover:text-white transition-colors">API Documentation</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-secondary-800 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-secondary-400 text-sm">
+                    © 2025 LuggageTracker. All Rights Reserved.
+                </p>
+                <div class="flex space-x-6 mt-4 md:mt-0">
+                    <a href="javascript:void(0)" class="text-secondary-400 hover:text-white text-sm transition-colors">Privacy</a>
+                    <a href="javascript:void(0)" class="text-secondary-400 hover:text-white text-sm transition-colors">Terms</a>
+                    <a href="javascript:void(0)" class="text-secondary-400 hover:text-white text-sm transition-colors">Cookies</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-btn').addEventListener('click', function() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Modal functionality
+        const addLuggageBtn = document.getElementById('add-luggage-btn');
+        const addNewCard = document.getElementById('add-new-card');
+        const modal = document.getElementById('add-luggage-modal');
+        const closeModal = document.getElementById('close-modal');
+        const cancelBtn = document.getElementById('cancel-btn');
+
+        function openModal() {
+            modal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModalFunc() {
+            modal.classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        }
+
+        addLuggageBtn.addEventListener('click', openModal);
+        addNewCard.addEventListener('click', openModal);
+        closeModal.addEventListener('click', closeModalFunc);
+        cancelBtn.addEventListener('click', closeModalFunc);
+
+        // Close modal when clicking outside
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                closeModalFunc();
+            }
+        });
+
+        // Escape key to close modal
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
+                closeModalFunc();
+            }
+        });
+
+        // Add animation classes when elements come into view
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-fade-in');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all cards for animation
+        document.querySelectorAll('.card').forEach(card => {
+            observer.observe(card);
+        });
+
+        // Form submission handling
+        document.querySelector('form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            // Here you would normally send the data to your backend
+            alert('Luggage profile created successfully!');
+            closeModalFunc();
+        });
+    </script>
+<script id="dhws-dataInjector" src="../public/dhws-data-injector.js"></script>
+</body>
+</html>

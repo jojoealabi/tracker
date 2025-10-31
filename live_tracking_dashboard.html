@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Live Tracking Dashboard - LuggageTracker</title>
+    <link rel="stylesheet" href="../css/main.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<script type="module" src="https://static.rocket.new/rocket-web.js?_cfg=https%3A%2F%2Fluggagetra3536back.builtwithrocket.new&_be=https%3A%2F%2Fapplication.rocket.new&_v=0.1.8"></script>
+</head>
+<body class="bg-background">
+    <!-- Navigation Header -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <div class="flex items-center">
+                    <svg class="h-8 w-8 text-primary mr-3" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M19 7h-3V6a4 4 0 0 0-8 0v1H5a1 1 0 0 0-1 1v11a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V8a1 1 0 0 0-1-1zM10 6a2 2 0 0 1 4 0v1h-4V6zm8 13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V9h2v1a1 1 0 0 0 2 0V9h4v1a1 1 0 0 0 2 0V9h2v10z"/>
+                    </svg>
+                    <span class="text-xl font-bold text-text-primary">LuggageTracker</span>
+                </div>
+
+                <!-- Desktop Navigation -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="homepage.html" class="text-text-secondary hover:text-primary transition-colors">Home</a>
+                    <a href="live_tracking_dashboard.html" class="text-primary font-semibold">Live Tracking</a>
+                    <a href="journey_timeline.html" class="text-text-secondary hover:text-primary transition-colors">Journey</a>
+                    <a href="luggage_profile_manager.html" class="text-text-secondary hover:text-primary transition-colors">My Luggage</a>
+                    <a href="emergency_action_center.html" class="text-text-secondary hover:text-primary transition-colors">Emergency</a>
+                    <a href="community_support.html" class="text-text-secondary hover:text-primary transition-colors">Support</a>
+                </div>
+
+                <!-- CTA Button -->
+                <div class="hidden md:flex">
+                    <button class="btn-primary">Add Luggage</button>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden">
+                    <button id="mobile-menu-btn" class="text-text-secondary hover:text-primary">
+                        <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Mobile Menu -->
+            <div id="mobile-menu" class="md:hidden hidden">
+                <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white border-t">
+                    <a href="homepage.html" class="block px-3 py-2 text-text-secondary hover:text-primary">Home</a>
+                    <a href="live_tracking_dashboard.html" class="block px-3 py-2 text-primary font-semibold">Live Tracking</a>
+                    <a href="journey_timeline.html" class="block px-3 py-2 text-text-secondary hover:text-primary">Journey</a>
+                    <a href="luggage_profile_manager.html" class="block px-3 py-2 text-text-secondary hover:text-primary">My Luggage</a>
+                    <a href="emergency_action_center.html" class="block px-3 py-2 text-text-secondary hover:text-primary">Emergency</a>
+                    <a href="community_support.html" class="block px-3 py-2 text-text-secondary hover:text-primary">Support</a>
+                    <div class="px-3 py-2">
+                        <button class="btn-primary w-full">Add Luggage</button>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Dashboard Header -->
+    <section class="bg-gradient-to-br from-primary-50 to-accent-50 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6">
+                <div>
+                    <h1 class="text-3xl font-bold text-text-primary mb-2">Live Tracking Dashboard</h1>
+                    <p class="text-lg text-text-secondary">Real-time monitoring of your luggage journey</p>
+                </div>
+                
+                <!-- Quick Stats -->
+                <div class="flex flex-wrap gap-4">
+                    <div class="bg-white rounded-lg px-4 py-2 shadow-sm">
+                        <div class="text-sm text-text-secondary">Active Trips</div>
+                        <div class="text-xl font-bold text-text-primary">2</div>
+                    </div>
+                    <div class="bg-white rounded-lg px-4 py-2 shadow-sm">
+                        <div class="text-sm text-text-secondary">Tracked Bags</div>
+                        <div class="text-xl font-bold text-text-primary">4</div>
+                    </div>
+                    <div class="bg-white rounded-lg px-4 py-2 shadow-sm">
+                        <div class="text-sm text-text-secondary">Success Rate</div>
+                        <div class="text-xl font-bold text-accent">100%</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Dashboard Content -->
+    <section class="py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-3 gap-8">
+                <!-- Main Tracking Panel -->
+                <div class="lg:col-span-2 space-y-6">
+                    <!-- Live Map View -->
+                    <div class="card">
+                        <div class="flex items-center justify-between mb-6">
+                            <h2 class="text-xl font-semibold text-text-primary">Live Location</h2>
+                            <div class="flex items-center space-x-2">
+                                <div class="w-3 h-3 bg-accent rounded-full animate-pulse"></div>
+                                <span class="text-sm text-text-secondary">Live Updates</span>
+                            </div>
+                        </div>
+
+                        <!-- Interactive Map -->
+                        <div class="relative bg-surface rounded-lg h-80 mb-6 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1569154941061-e231b4725ef1?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Live tracking map showing luggage location" class="w-full h-full object-cover" loading="lazy" onerror="this.src='https://images.pexels.com/photos/346885/pexels-photo-346885.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'; this.onerror=null;" />
+                            
+                            <!-- Map Overlay -->
+                            <div class="absolute inset-0 bg-primary/10">
+                                <!-- Current Location Marker -->
+                                <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                                    <div class="bg-primary rounded-full p-3 shadow-lg animate-pulse">
+                                        <svg class="h-6 w-6 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/>
+                                        </svg>
+                                    </div>
+                                </div>
+
+                                <!-- Route Path -->
+                                <svg class="absolute inset-0 w-full h-full" viewBox="0 0 320 200">
+                                    <path d="M50 150 Q160 50 270 100" stroke="#2563EB" stroke-width="3" fill="none" stroke-dasharray="5,5" opacity="0.7"/>
+                                </svg>
+
+                                <!-- Destination Marker -->
+                                <div class="absolute top-1/4 right-1/4">
+                                    <div class="bg-accent rounded-full p-2 shadow-md">
+                                        <svg class="h-4 w-4 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Map Controls -->
+                            <div class="absolute top-4 right-4 flex flex-col space-y-2">
+                                <button class="bg-white p-2 rounded-lg shadow-md hover:shadow-lg transition-shadow">
+                                    <svg class="h-5 w-5 text-text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                                    </svg>
+                                </button>
+                                <button class="bg-white p-2 rounded-lg shadow-md hover:shadow-lg transition-shadow">
+                                    <svg class="h-5 w-5 text-text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4"/>
+                                    </svg>
+                                </button>
+                                <button class="bg-white p-2 rounded-lg shadow-md hover:shadow-lg transition-shadow">
+                                    <svg class="h-5 w-5 text-text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Current Status -->
+                        <div class="grid md:grid-cols-3 gap-4">
+                            <div class="text-center">
+                                <div class="text-2xl font-bold text-text-primary">Heathrow Airport</div>
+                                <div class="text-sm text-text-secondary">Current Location</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-2xl font-bold text-accent">In Transit</div>
+                                <div class="text-sm text-text-secondary">Status</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-2xl font-bold text-text-primary">2:45 PM</div>
+                                <div class="text-sm text-text-secondary">ETA</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Predictive Analytics -->
+                    <div class="card">
+                        <div class="flex items-center justify-between mb-6">
+                            <h2 class="text-xl font-semibold text-text-primary">Predictive Insights</h2>
+                            <span class="status-success">AI Powered</span>
+                        </div>
+
+                        <div class="space-y-4">
+                            <!-- Delay Prediction -->
+                            <div class="bg-accent-50 border border-accent-100 rounded-lg p-4">
+                                <div class="flex items-start space-x-3">
+                                    <div class="bg-accent-100 p-2 rounded-lg">
+                                        <svg class="h-5 w-5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                        </svg>
+                                    </div>
+                                    <div class="flex-1">
+                                        <h3 class="font-semibold text-text-primary">On-Time Arrival Predicted</h3>
+                                        <p class="text-sm text-text-secondary mt-1">Based on current flight data and historical patterns, your luggage is expected to arrive on schedule.</p>
+                                        <div class="mt-2 text-xs text-accent font-medium">Confidence: 94%</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Weather Alert -->
+                            <div class="bg-amber-50 border border-amber-100 rounded-lg p-4">
+                                <div class="flex items-start space-x-3">
+                                    <div class="bg-amber-100 p-2 rounded-lg">
+                                        <svg class="h-5 w-5 text-warning" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.732-.833-2.464 0L4.35 16.5c-.77.833.192 2.5 1.732 2.5z"/>
+                                        </svg>
+                                    </div>
+                                    <div class="flex-1">
+                                        <h3 class="font-semibold text-text-primary">Weather Advisory</h3>
+                                        <p class="text-sm text-text-secondary mt-1">Light snow expected at destination. Possible 15-minute delay in baggage handling.</p>
+                                        <div class="mt-2 text-xs text-warning font-medium">Monitor for updates</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Route Optimization -->
+                            <div class="bg-primary-50 border border-primary-100 rounded-lg p-4">
+                                <div class="flex items-start space-x-3">
+                                    <div class="bg-primary-100 p-2 rounded-lg">
+                                        <svg class="h-5 w-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                                        </svg>
+                                    </div>
+                                    <div class="flex-1">
+                                        <h3 class="font-semibold text-text-primary">Optimal Route Detected</h3>
+                                        <p class="text-sm text-text-secondary mt-1">Your luggage is taking the fastest available route. Estimated time saved: 25 minutes.</p>
+                                        <div class="mt-2 text-xs text-primary font-medium">Efficiency optimized</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Journey Progress -->
+                    <div class="card">
+                        <h2 class="text-xl font-semibold text-text-primary mb-6">Journey Progress</h2>
+                        
+                        <div class="relative">
+                            <!-- Progress Line -->
+                            <div class="absolute left-6 top-0 bottom-0 w-0.5 bg-secondary-200"></div>
+                            <div class="absolute left-6 top-0 w-0.5 bg-primary h-32"></div>
+                            
+                            <div class="space-y-8">
+                                <!-- Completed Step -->
+                                <div class="flex items-start space-x-4">
+                                    <div class="bg-primary rounded-full p-2 relative z-10">
+                                        <svg class="h-4 w-4 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                                        </svg>
+                                    </div>
+                                    <div class="flex-1">
+                                        <h3 class="font-semibold text-text-primary">Check-in Complete</h3>
+                                        <p class="text-sm text-text-secondary">London Heathrow (LHR) - Terminal 5</p>
+                                        <p class="text-xs text-text-secondary mt-1">Today at 10:30 AM</p>
+                                    </div>
+                                </div>
+
+                                <!-- Current Step -->
+                                <div class="flex items-start space-x-4">
+                                    <div class="bg-accent rounded-full p-2 relative z-10 animate-pulse">
+                                        <svg class="h-4 w-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/>
+                                        </svg>
+                                    </div>
+                                    <div class="flex-1">
+                                        <h3 class="font-semibold text-text-primary">In Transit</h3>
+                                        <p class="text-sm text-text-secondary">Flight BA 247 - Currently airborne</p>
+                                        <p class="text-xs text-text-secondary mt-1">Estimated arrival: 2:45 PM</p>
+                                    </div>
+                                </div>
+
+                                <!-- Upcoming Step -->
+                                <div class="flex items-start space-x-4">
+                                    <div class="bg-secondary-200 rounded-full p-2 relative z-10">
+                                        <svg class="h-4 w-4 text-secondary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                                        </svg>
+                                    </div>
+                                    <div class="flex-1">
+                                        <h3 class="font-semibold text-text-secondary">Baggage Claim</h3>
+                                        <p class="text-sm text-text-secondary">New York JFK - Terminal 7</p>
+                                        <p class="text-xs text-text-secondary mt-1">Carousel 12</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sidebar -->
+                <div class="space-y-6">
+                    <!-- Active Luggage -->
+                    <div class="card">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-lg font-semibold text-text-primary">Active Luggage</h3>
+                            <button class="text-primary hover:text-primary-700 text-sm font-medium">
+                                <svg class="h-4 w-4 inline mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                                </svg>
+                                Add Bag
+                            </button>
+                        </div>
+
+                        <div class="space-y-4">
+                            <!-- Luggage Item 1 -->
+                            <div class="border border-secondary-200 rounded-lg p-4">
+                                <div class="flex items-start space-x-3">
+                                    <img src="https://images.unsplash.com/photo-1553062407-98eeb64c6a62?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Black suitcase" class="w-12 h-12 object-cover rounded-lg" loading="lazy" onerror="this.src='https://images.pexels.com/photos/1008155/pexels-photo-1008155.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'; this.onerror=null;" />
+                                    <div class="flex-1">
+                                        <div class="flex items-center justify-between">
+                                            <h4 class="font-medium text-text-primary">Large Suitcase</h4>
+                                            <span class="status-success">Tracked</span>
+                                        </div>
+                                        <p class="text-sm text-text-secondary">Tag: LT-2024-001</p>
+                                        <p class="text-xs text-text-secondary mt-1">Flight BA 247</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Luggage Item 2 -->
+                            <div class="border border-secondary-200 rounded-lg p-4">
+                                <div class="flex items-start space-x-3">
+                                    <img src="https://images.unsplash.com/photo-1586880244386-8b3e34c8382c?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Carry-on bag" class="w-12 h-12 object-cover rounded-lg" loading="lazy" onerror="this.src='https://images.pixabay.com/photo/2019/06/17/21/34/suitcase-4280679_1280.jpg'; this.onerror=null;" />
+                                    <div class="flex-1">
+                                        <div class="flex items-center justify-between">
+                                            <h4 class="font-medium text-text-primary">Carry-on</h4>
+                                            <span class="status-success">Tracked</span>
+                                        </div>
+                                        <p class="text-sm text-text-secondary">Tag: LT-2024-002</p>
+                                        <p class="text-xs text-text-secondary mt-1">Flight BA 247</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Quick Actions -->
+                    <div class="card">
+                        <h3 class="text-lg font-semibold text-text-primary mb-4">Quick Actions</h3>
+                        <div class="space-y-3">
+                            <button class="w-full flex items-center space-x-3 p-3 text-left hover:bg-surface rounded-lg transition-colors">
+                                <div class="bg-primary-100 p-2 rounded-lg">
+                                    <svg class="h-4 w-4 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-5 5v-5zM4.828 4.828A4 4 0 015.5 4H9v1H5.5a3 3 0 00-2.121.879L4.828 4.828zM19 12a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <div class="font-medium text-text-primary">Set Alert</div>
+                                    <div class="text-sm text-text-secondary">Custom notifications</div>
+                                </div>
+                            </button>
+
+                            <button class="w-full flex items-center space-x-3 p-3 text-left hover:bg-surface rounded-lg transition-colors">
+                                <div class="bg-accent-100 p-2 rounded-lg">
+                                    <svg class="h-4 w-4 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z"/>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <div class="font-medium text-text-primary">Share Location</div>
+                                    <div class="text-sm text-text-secondary">With family/friends</div>
+                                </div>
+                            </button>
+
+                            <a href="emergency_action_center.html" class="w-full flex items-center space-x-3 p-3 text-left hover:bg-surface rounded-lg transition-colors">
+                                <div class="bg-red-100 p-2 rounded-lg">
+                                    <svg class="h-4 w-4 text-error" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.732-.833-2.464 0L4.35 16.5c-.77.833.192 2.5 1.732 2.5z"/>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <div class="font-medium text-text-primary">Report Issue</div>
+                                    <div class="text-sm text-text-secondary">Emergency support</div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Recent Notifications -->
+                    <div class="card">
+                        <h3 class="text-lg font-semibold text-text-primary mb-4">Recent Notifications</h3>
+                        <div class="space-y-3">
+                            <div class="flex items-start space-x-3 p-3 bg-accent-50 rounded-lg">
+                                <div class="bg-accent rounded-full p-1">
+                                    <svg class="h-3 w-3 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                                    </svg>
+                                </div>
+                                <div class="flex-1">
+                                    <p class="text-sm font-medium text-text-primary">Flight departed on time</p>
+                                    <p class="text-xs text-text-secondary">2 minutes ago</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start space-x-3 p-3 bg-primary-50 rounded-lg">
+                                <div class="bg-primary rounded-full p-1">
+                                    <svg class="h-3 w-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                    </svg>
+                                </div>
+                                <div class="flex-1">
+                                    <p class="text-sm font-medium text-text-primary">Luggage loaded successfully</p>
+                                    <p class="text-xs text-text-secondary">15 minutes ago</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start space-x-3 p-3 bg-amber-50 rounded-lg">
+                                <div class="bg-warning rounded-full p-1">
+                                    <svg class="h-3 w-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.732-.833-2.464 0L4.35 16.5c-.77.833.192 2.5 1.732 2.5z"/>
+                                    </svg>
+                                </div>
+                                <div class="flex-1">
+                                    <p class="text-sm font-medium text-text-primary">Weather advisory updated</p>
+                                    <p class="text-xs text-text-secondary">1 hour ago</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Connection Status -->
+                    <div class="card">
+                        <h3 class="text-lg font-semibold text-text-primary mb-4">Connection Status</h3>
+                        <div class="space-y-3">
+                            <div class="flex items-center justify-between">
+                                <span class="text-sm text-text-secondary">GPS Signal</span>
+                                <div class="flex items-center space-x-2">
+                                    <div class="w-2 h-2 bg-accent rounded-full"></div>
+                                    <span class="text-sm font-medium text-accent">Strong</span>
+                                </div>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span class="text-sm text-text-secondary">Data Connection</span>
+                                <div class="flex items-center space-x-2">
+                                    <div class="w-2 h-2 bg-accent rounded-full"></div>
+                                    <span class="text-sm font-medium text-accent">Online</span>
+                                </div>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span class="text-sm text-text-secondary">Last Update</span>
+                                <span class="text-sm font-medium text-text-primary">Just now</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-secondary-900 text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="grid md:grid-cols-4 gap-8">
+                <!-- Company Info -->
+                <div class="md:col-span-2">
+                    <div class="flex items-center mb-4">
+                        <svg class="h-8 w-8 text-primary mr-3" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M19 7h-3V6a4 4 0 0 0-8 0v1H5a1 1 0 0 0-1 1v11a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V8a1 1 0 0 0-1-1zM10 6a2 2 0 0 1 4 0v1h-4V6zm8 13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V9h2v1a1 1 0 0 0 2 0V9h4v1a1 1 0 0 0 2 0V9h2v10z"/>
+                        </svg>
+                        <span class="text-xl font-bold">LuggageTracker</span>
+                    </div>
+                    <p class="text-secondary-200 mb-4 max-w-md">
+                        Your trusted companion for stress-free travel. Track your luggage with confidence and travel with peace of mind.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="javascript:void(0)" class="text-secondary-400 hover:text-white transition-colors">
+                            <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/>
+                            </svg>
+                        </a>
+                        <a href="javascript:void(0)" class="text-secondary-400 hover:text-white transition-colors">
+                            <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M22.46 6c-.77.35-1.6.58-2.46.69.88-.53 1.56-1.37 1.88-2.38-.83.5-1.75.85-2.72 1.05C18.37 4.5 17.26 4 16 4c-2.35 0-4.27 1.92-4.27 4.29 0 .34.04.67.11.98C8.28 9.09 5.11 7.38 3 4.79c-.37.63-.58 1.37-.58 2.15 0 1.49.75 2.81 1.91 3.56-.71 0-1.37-.2-1.95-.5v.03c0 2.08 1.48 3.82 3.44 4.21a4.22 4.22 0 0 1-1.93.07 4.28 4.28 0 0 0 4 2.98 8.521 8.521 0 0 1-5.33 1.84c-.34 0-.68-.02-1.02-.06C3.44 20.29 5.7 21 8.12 21 16 21 20.33 14.46 20.33 8.79c0-.19 0-.37-.01-.56.84-.6 1.56-1.36 2.14-2.23z"/>
+                            </svg>
+                        </a>
+                        <a href="javascript:void(0)" class="text-secondary-400 hover:text-white transition-colors">
+                            <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div>
+                    <h3 class="font-semibold mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="live_tracking_dashboard.html" class="text-secondary-300 hover:text-white transition-colors">Live Tracking</a></li>
+                        <li><a href="journey_timeline.html" class="text-secondary-300 hover:text-white transition-colors">Journey Timeline</a></li>
+                        <li><a href="luggage_profile_manager.html" class="text-secondary-300 hover:text-white transition-colors">My Luggage</a></li>
+                        <li><a href="emergency_action_center.html" class="text-secondary-300 hover:text-white transition-colors">Emergency Center</a></li>
+                        <li><a href="community_support.html" class="text-secondary-300 hover:text-white transition-colors">Support</a></li>
+                    </ul>
+                </div>
+
+                <!-- Support -->
+                <div>
+                    <h3 class="font-semibold mb-4">Support</h3>
+                    <ul class="space-y-2">
+                        <li><a href="javascript:void(0)" class="text-secondary-300 hover:text-white transition-colors">Help Center</a></li>
+                        <li><a href="javascript:void(0)" class="text-secondary-300 hover:text-white transition-colors">Contact Us</a></li>
+                        <li><a href="javascript:void(0)" class="text-secondary-300 hover:text-white transition-colors">Privacy Policy</a></li>
+                        <li><a href="javascript:void(0)" class="text-secondary-300 hover:text-white transition-colors">Terms of Service</a></li>
+                        <li><a href="javascript:void(0)" class="text-secondary-300 hover:text-white transition-colors">API Documentation</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-secondary-800 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-secondary-400 text-sm">
+                    © 2025 LuggageTracker. All Rights Reserved.
+                </p>
+                <div class="flex space-x-6 mt-4 md:mt-0">
+                    <a href="javascript:void(0)" class="text-secondary-400 hover:text-white text-sm transition-colors">Privacy</a>
+                    <a href="javascript:void(0)" class="text-secondary-400 hover:text-white text-sm transition-colors">Terms</a>
+                    <a href="javascript:void(0)" class="text-secondary-400 hover:text-white text-sm transition-colors">Cookies</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-btn').addEventListener('click', function() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Simulate real-time updates
+        function updateTrackingData() {
+            const statusElements = document.querySelectorAll('.animate-pulse');
+            statusElements.forEach(element => {
+                element.classList.add('animate-pulse');
+            });
+
+            // Simulate location updates
+            setTimeout(() => {
+                console.log('Location updated');
+            }, 2000);
+        }
+
+        // Initialize real-time updates
+        setInterval(updateTrackingData, 30000); // Update every 30 seconds
+
+        // Map interaction handlers
+        document.querySelectorAll('.absolute button').forEach(button => {
+            button.addEventListener('click', function() {
+                // Map control functionality would go here
+                console.log('Map control clicked');
+            });
+        });
+
+        // Notification handling
+        function showNotification(message, type = 'info') {
+            // Create notification element
+            const notification = document.createElement('div');
+            notification.className = `fixed top-4 right-4 p-4 rounded-lg shadow-lg z-50 ${
+                type === 'success' ? 'bg-accent text-white' : 
+                type === 'warning' ? 'bg-warning text-white' : 
+                'bg-primary text-white'
+            }`;
+            notification.textContent = message;
+            
+            document.body.appendChild(notification);
+            
+            // Auto remove after 5 seconds
+            setTimeout(() => {
+                notification.remove();
+            }, 5000);
+        }
+
+        // Simulate incoming notifications
+        setTimeout(() => {
+            showNotification('Luggage location updated', 'success');
+        }, 5000);
+
+        // Add animation classes when elements come into view
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-fade-in');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all cards for animation
+        document.querySelectorAll('.card').forEach(card => {
+            observer.observe(card);
+        });
+
+        // WebSocket simulation for real-time updates
+        function simulateWebSocket() {
+            // This would be replaced with actual WebSocket connection
+            console.log('WebSocket connected - receiving real-time updates');
+            
+            // Simulate periodic updates
+            setInterval(() => {
+                const timestamp = new Date().toLocaleTimeString();
+                console.log(`Location update received at ${timestamp}`);
+                
+                // Update last update time
+                const lastUpdateElements = document.querySelectorAll('[data-last-update]');
+                lastUpdateElements.forEach(element => {
+                    element.textContent = 'Just now';
+                });
+            }, 15000);
+        }
+
+        // Initialize WebSocket simulation
+        simulateWebSocket();
+    </script>
+<script id="dhws-dataInjector" src="../public/dhws-data-injector.js"></script>
+</body>
+</html>
